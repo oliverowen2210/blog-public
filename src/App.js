@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       const postsData = await fetch(
-        "https://blog-api-production-c97a.up.railway.app"
+        "https://blog-api-production-c97a.up.railway.app/posts"
       );
       const posts = await postsData.json();
       setPosts(posts);
