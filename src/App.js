@@ -22,7 +22,7 @@ function App() {
         posts.map((post) => {
           const formattedDate = format(
             new Date(post.createdAt),
-            "MMMM Qo, yyyy"
+            "MMMM Do, yyyy"
           );
           return (
             <div className="post">
