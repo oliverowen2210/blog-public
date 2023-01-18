@@ -2,6 +2,7 @@
   "name": "blog-public",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "engines": {
     "node": "v16.17.0"
   },
