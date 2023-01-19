@@ -129,7 +129,7 @@ const PostDetail = function () {
               onChange={(event) => setCommentText(event.target.value)}
             ></textarea>
           </div>
-          <div className="flexRow">
+          <div className="userCommentFooter">
             <div className="postFormInputGroup userCommentUsername">
               <label htmlFor="username">Username (optional)</label>
               <input
