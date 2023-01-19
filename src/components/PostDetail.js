@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import format from "date-fns/format";
-import { ModalContext } from "./Layout";
 import parse from "html-react-parser";
 
 import CommentsList from "./CommentsList";
@@ -18,8 +17,6 @@ const PostDetail = function () {
 
   const postID = parseInt(useParams().postid);
   const navigate = useNavigate();
-
-  const createModal = useContext(ModalContext);
 
   function formatDate(post) {
     setFormattedDate(format(new Date(post.createdAt), "MMMM Qo, yyyy"));
