@@ -83,6 +83,7 @@ const PostDetail = function () {
         postid: postID,
       });
       setComments(newComments);
+      event.target.reset();
     } catch (err) {
       console.log(err);
     }
