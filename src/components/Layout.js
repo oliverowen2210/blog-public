@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 
+/**  modal stuff (currently unused in public website) 
 import ScreenBlock from "./ScreenBlock";
 import Modal from "./Modal";
 
 export const ModalContext = React.createContext();
+*/
 
 const Layout = function () {
+  /*
   const [blockScreen, setBlockScreen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState(null);
@@ -49,9 +52,10 @@ const Layout = function () {
       .catch((err) => console.log(err));
   }
 
+  */
   return (
     <div className="layoutWrapper">
-      <ScreenBlock show={blockScreen} />
+      {/**<ScreenBlock show={blockScreen} />
       <Modal
         show={showModal}
         title={modalTitle}
@@ -61,19 +65,19 @@ const Layout = function () {
         buttonText={modalButtonText}
       />
 
-      <ModalContext.Provider value={createModal}>
-        <div className="layout flexCol">
-          <div className="layoutHeader">
-            <Link to="/">
-              <h1>Blog API</h1>
-            </Link>
-          </div>
-          <div className="layoutBody">
-            <Outlet />
-          </div>
-          <div className="layoutFooter" />
+  <ModalContext.Provider value={createModal}>*/}
+      <div className="layout flexCol">
+        <div className="layoutHeader">
+          <Link to="/">
+            <h1>Blog API</h1>
+          </Link>
         </div>
-      </ModalContext.Provider>
+        <div className="layoutBody">
+          <Outlet />
+        </div>
+        <div className="layoutFooter" />
+      </div>
+      {/*</ModalContext.Provider>*/}
     </div>
   );
 };
