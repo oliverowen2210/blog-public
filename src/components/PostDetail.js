@@ -34,12 +34,12 @@ const PostDetail = function () {
           setError("No post with that ID was found.");
           return;
         }
-        const postJSON = await postData.json();
-        const post = postJSON.post;
-        const comments = postJSON.comments;
-        /** get comments for later 
-        /* const comments = postJSON.comments;
-        */
+        const post = await postData.json();
+
+        const commentsData = await fetch(
+          `${process.env.REACT_APP_BLOG_API_URL}/comments/post/${postID}`
+        );
+        const comments = commentsData.json();
         formatDate(post);
         setPost(post);
         setComments(comments);
@@ -61,19 +61,17 @@ const PostDetail = function () {
   async function submitCommentButtonHandler(event) {
     event.preventDefault();
     try {
-      await fetch(
-        `${process.env.REACT_APP_BLOG_API_URL}/posts/${postID}/comments`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: commentUsername,
-            text: commentText,
-          }),
-        }
-      );
+      await fetch(`${process.env.REACT_APP_BLOG_API_URL}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: commentUsername,
+          text: commentText,
+          postid: postID,
+        }),
+      });
 
       let newComments = [...comments];
       newComments.unshift({
