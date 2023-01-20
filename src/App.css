@@ -101,7 +101,7 @@
 .postCard {
   border: 3px solid rgb(56, 60, 71);
   box-shadow: 0px 0px 3px rgb(72, 72, 94);
-  width: 675px;
+  min-width: fit-content;
   background-color: white;
   border-radius: 1em;
   margin-bottom: 32px;
@@ -314,10 +314,6 @@
 }
 
 @media only screen and (max-width: 800px) {
-  .postCard {
-    width: 450px;
-  }
-
   .postDetailLink::after,
   .postDetailDate::after {
     content: "";
@@ -351,10 +347,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .postCard {
-    width: 300px;
-  }
-
   .postCardInfo {
     flex-direction: column;
   }
@@ -363,7 +355,8 @@
     margin: 10px 0;
   }
 
-  .postCardLink::after {
+  .postCardLink::after,
+  .postCardDate::after {
     content: none;
   }
 
