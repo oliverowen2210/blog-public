@@ -4,10 +4,14 @@ import format from "date-fns/format";
 
 const PostCard = function (props) {
   return (
-    <Link className="postCardWrapper" to={`/post/${props.post.id}`}>
+    <div className="postCardWrapper">
       <div className="postCard" key={props.post.id}>
         <div className="postCardHeader">
-          <h2 className="postCardTitle">{props.post.title}</h2>
+          <h2 className="postCardTitle">
+            <Link className="postCardTitleLink" to={`/post/${props.post.id}`}>
+              {props.post.title}
+            </Link>
+          </h2>
         </div>
 
         <div className="postCardInfo flexRow">
@@ -30,7 +34,7 @@ const PostCard = function (props) {
           </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
