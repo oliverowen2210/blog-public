@@ -5,7 +5,7 @@ const CommentsList = function (props) {
   return (
     <div className="commentsList">
       {props.comments.map((comment) => (
-        <div className="comment">
+        <div className="comment" key={`comment ${comment.id}`}>
           <div className="commentHeader flexRow">
             <h4 className="commentAuthor">{comment.username} says</h4>
             <p className="commentDate">
