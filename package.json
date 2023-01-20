@@ -2,7 +2,7 @@
   "name": "blog-public",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://oliverowen2210.github.io/blog-public",
   "engines": {
     "node": "v16.17.0"
   },
@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
