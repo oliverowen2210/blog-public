@@ -39,6 +39,8 @@ const PostDetail = function () {
         const commentsData = await fetch(
           `${process.env.REACT_APP_BLOG_API_URL}/comments/post/${postID}`
         );
+        const comments = await commentsData.json();
+
         setFormattedDate(formatDate(post.createdAt));
         setPost(post);
         setComments(comments);
