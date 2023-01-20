@@ -78,7 +78,7 @@
   font-weight: bold;
   font-size: 1.5em;
   text-align: center;
-  height: 125px;
+  height: fit-content;
   margin-bottom: 24px;
 }
 
@@ -268,8 +268,8 @@
 }
 
 .userCommentSubmitButton {
-  width: 80px;
-  height: 36px;
+  width: fit-content;
+  height: fit-content;
   align-self: center;
   position: relative;
   top: 3px;
@@ -282,7 +282,7 @@
 .comment {
   background-color: white;
   padding: 12px;
-  min-width: 400px;
+  min-width: 20em;
   width: fit-content;
   max-width: min(60vw, 1500px);
   box-sizing: border-box;
