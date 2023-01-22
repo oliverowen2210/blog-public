@@ -1,1 +1,6 @@
-Este es el "frontend" publico para mi proyecto Blog API. Aqui puedes leer los posts que yo subo y dejar comentarios.
+El frontend público de mi proyecto, [Blog API](https://github.com/oliverowen2210/blog-api. Aquí, los usuarios pueden leer todos los articulos que publico
+y dejar sus comentarios, opcionalmente dejando un nombre de usuario.
+
+Enlace: https://oliverowen2210.github.io/blog-public/
+
+![Imagen del sitio. Un comentario esta siendo escrito debajo de un articulo.](https://user-images.githubusercontent.com/95064346/213932010-2313b481-b128-4278-a014-0b90634ae49d.png)
