@@ -5,15 +5,13 @@ import format from "date-fns/format";
 import parse from "html-react-parser";
 
 import CommentsList from "./CommentsList";
+import PostCommentForm from "./PostCommentForm";
 
 const PostDetail = function () {
   let [post, setPost] = useState(null);
   let [comments, setComments] = useState(null);
   let [error, setError] = useState(null);
   let [formattedDate, setFormattedDate] = useState(null);
-
-  let [commentUsername, setCommentUsername] = useState(null);
-  let [commentText, setCommentText] = useState(null);
 
   const postID = parseInt(useParams().postid);
   const navigate = useNavigate();
@@ -59,35 +57,6 @@ const PostDetail = function () {
     }
   }, [navigate, postID]);
 
-  async function submitCommentButtonHandler(event) {
-    event.preventDefault();
-    try {
-      await fetch(`${process.env.REACT_APP_BLOG_API_URL}/comments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: commentUsername,
-          text: commentText,
-          postid: postID,
-        }),
-      });
-
-      let newComments = [...comments];
-      newComments.unshift({
-        username: commentUsername,
-        text: commentText,
-        createdAt: new Date(),
-        postid: postID,
-      });
-      setComments(newComments);
-      event.target.reset();
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   return error ? (
     <div>
       <p>{error}</p>
@@ -119,32 +88,7 @@ const PostDetail = function () {
 
       <div className="postComments">
         <h2>Comments</h2>
-
-        <form className="userComment">
-          <div className="postFormInputGroup userCommentText">
-            <label htmlFor="comment">Leave a comment</label>
-            <textarea
-              name="comment"
-              onChange={(event) => setCommentText(event.target.value)}
-            ></textarea>
-          </div>
-          <div className="userCommentFooter">
-            <div className="postFormInputGroup userCommentUsername">
-              <label htmlFor="username">Username (optional)</label>
-              <input
-                name="username"
-                placeholder="Anonymous"
-                onChange={(event) => setCommentUsername(event.target.value)}
-              ></input>
-            </div>
-            <button
-              className="userCommentSubmitButton"
-              onClick={submitCommentButtonHandler}
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+        <PostCommentForm comments={comments} setComments={setComments} />
 
         {comments ? (
           <CommentsList comments={comments} />
