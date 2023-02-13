@@ -49,6 +49,7 @@ export default function PostCommentForm(props) {
         <button
           className="userCommentSubmitButton"
           onClick={submitCommentButtonHandler}
+          disabled={!commentText ? true : false}
         >
           Submit
         </button>

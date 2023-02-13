@@ -289,6 +289,16 @@
   top: 3px;
 }
 
+.userCommentSubmitButton:disabled {
+  cursor: default;
+  background-color: gray;
+  color: rgb(233, 233, 233);
+}
+
+.userCommentSubmitButton:disabled:hover {
+  color: rgb(233, 233, 233);
+}
+
 .commentsList {
   margin-bottom: 32px;
 }
