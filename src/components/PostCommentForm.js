@@ -1,28 +1,40 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-export default function PostCommentForm(props) {
-  let [commentUsername, setCommentUsername] = useState("");
+import socket from "../socket";
+
+export default function PostCommentForm() {
+  let posting = false;
+  let [username, setUsername] = useState("");
   let [commentText, setCommentText] = useState("");
 
-  const postID = parseInt(useParams().postid);
+  const postid = parseInt(useParams().postid);
 
   async function submitCommentButtonHandler(event) {
+    posting = true;
     event.preventDefault();
+
+    if (posting) return;
     try {
-      let newComments = [...props.comments];
-      newComments.unshift({
-        username: commentUsername,
-        text: commentText,
-        createdAt: new Date(),
-        postid: postID,
-      });
-      props.setComments(newComments);
+      const request = await fetch(
+        `${process.env.REACT_APP_BLOG_API_URL}/posts/${postid}/comments/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, text: commentText }),
+        }
+      );
+
+      const commentData = await request.json();
+      const comment = commentData.comment;
+      socket.emit("user_posted_comment", comment);
       setCommentText("");
-      setCommentUsername("");
     } catch (err) {
       console.log(err);
     }
+    posting = false;
   }
   return (
     <form className="userComment">
@@ -42,8 +54,8 @@ export default function PostCommentForm(props) {
           <input
             name="username"
             placeholder="Anonymous"
-            onChange={(event) => setCommentUsername(event.target.value)}
-            value={commentUsername}
+            onChange={(event) => setUsername(event.target.value)}
+            value={username}
           ></input>
         </div>
         <button
