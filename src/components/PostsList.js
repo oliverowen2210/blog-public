@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+import socket from "../socket";
+
 import PostCard from "./PostCard";
 
 const PostsList = function () {
   let [posts, setPosts] = useState(null);
   let [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    socket.on("new_post", (post) => {
+      setPosts((posts) => {
+        let newPosts = [...posts];
+        newPosts.unshift(post);
+        return newPosts;
+      });
+    });
+
+    return () => {
+      socket.off("new_post");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //get posts
   useEffect(() => {
