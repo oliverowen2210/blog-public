@@ -1,5 +1,5 @@
 import io from "socket.io-client";
 
-let socket = io("http://localhost:3001", {});
+let socket = io(process.env.REACT_APP_BLOG_API_URL, {});
 
 export default socket;
