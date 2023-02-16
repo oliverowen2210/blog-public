@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import format from "date-fns/format";
 import parse from "html-react-parser";
+
+import socket from "../socket";
 
 import CommentsList from "./CommentsList";
 import PostCommentForm from "./PostCommentForm";
@@ -20,6 +22,21 @@ const PostDetail = function () {
     return format(new Date(date), "MMMM Qo, yyyy");
   }
 
+  useEffect(() => {
+    socket.on("new_comment", (comment) => {
+      setComments((comments) => {
+        let newComments = [...comments];
+        newComments.unshift(comment);
+        return newComments;
+      });
+    });
+
+    return () => {
+      socket.off("new_comment");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   //get post
   useEffect(() => {
     async function fetchData() {
@@ -34,8 +51,9 @@ const PostDetail = function () {
         }
         const post = await postData.json();
 
+        /** get post's comments */
         const commentsData = await fetch(
-          `${process.env.REACT_APP_BLOG_API_URL}/comments/post/${postID}`
+          `${process.env.REACT_APP_BLOG_API_URL}/posts/${postID}/comments`
         );
         const comments = await commentsData.json();
 
@@ -88,7 +106,7 @@ const PostDetail = function () {
 
       <div className="postComments">
         <h2>Comments</h2>
-        <PostCommentForm comments={comments} setComments={setComments} />
+        <PostCommentForm />
 
         {comments ? (
           <CommentsList comments={comments} />
